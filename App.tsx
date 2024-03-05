@@ -2,15 +2,13 @@ import React from 'react';
 import {SafeAreaView} from 'react-native';
 import {Text} from './src/components/Text/Text';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
 function App(): JSX.Element {
   return (
     <SafeAreaView>
-      <Text preset="headingLarge" style={{fontFamily: 'Satoshi-BlackItalic'}}>
+      <Text preset="headingLarge" bold>
         Beatriz Dadalto!
       </Text>
-      <Text preset="headingSmall" style={{color: 'green'}}>
+      <Text preset="headingSmall" italic>
         Beatriz Dadalto!
       </Text>
     </SafeAreaView>
