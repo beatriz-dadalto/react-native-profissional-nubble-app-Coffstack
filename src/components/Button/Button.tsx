@@ -1,14 +1,18 @@
 import React from 'react';
 import {Text} from '../Text/Text';
-import {TouchableOpacityBox} from '../Box/Box';
+import {TouchableOpacityBox, TouchableOpacityProps} from '../Box/Box';
 import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
 
-interface ButtonProps {
+interface ButtonProps extends TouchableOpacityProps {
   title: string;
   loading?: boolean;
 }
 
-export function Button({title, loading}: ButtonProps) {
+export function Button({
+  title,
+  loading,
+  ...touchableOpacityProps
+}: ButtonProps) {
   return (
     <TouchableOpacityBox
       backgroundColor="buttonPrimary"
@@ -16,7 +20,8 @@ export function Button({title, loading}: ButtonProps) {
       height={50}
       alignItems="center"
       justifyContent="center"
-      borderRadius="s16">
+      borderRadius="s16"
+      {...touchableOpacityProps}>
       {loading ? (
         <ActivityIndicator color="gray4" />
       ) : (

@@ -17,9 +17,7 @@ function App(): JSX.Element {
           <Text preset="headingSmall" italic>
             Beatriz Dadalto!
           </Text>
-          <Box marginBottom="s24">
-            <Button title="Entrar" />
-          </Box>
+          <Button title="Entrar" marginBottom="s12" />
           <Button loading title="Loading" />
         </View>
       </SafeAreaView>
