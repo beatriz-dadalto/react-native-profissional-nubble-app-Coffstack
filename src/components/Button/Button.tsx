@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text} from '../Text/Text';
 import {Box} from '../Box/Box';
+import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
 
 interface ButtonProps {
   title: string;
@@ -14,11 +15,10 @@ export function Button({title, loading}: ButtonProps) {
       paddingHorizontal="s20"
       height={50}
       alignItems="center"
-      justifyContent="center">
+      justifyContent="center"
+      borderRadius="s16">
       {loading ? (
-        <Text preset="headingSmall" italic style={{color: 'red'}}>
-          Loading...
-        </Text>
+        <ActivityIndicator color="gray4" />
       ) : (
         <Text preset="paragraphMedium" bold style={{color: '#FFF'}}>
           {title}
