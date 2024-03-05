@@ -7,7 +7,12 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 function App(): JSX.Element {
   return (
     <SafeAreaView>
-      <Text>Coffstack, Beatriz Dadalto!</Text>
+      <Text preset="headingLarge" style={{color: 'red'}}>
+        Beatriz Dadalto!
+      </Text>
+      <Text preset="headingSmall" style={{color: 'green'}}>
+        Beatriz Dadalto!
+      </Text>
     </SafeAreaView>
   );
 }
