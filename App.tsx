@@ -13,7 +13,9 @@ function App(): JSX.Element {
           <Text preset="headingLarge" bold>
             Beatriz Dadalto!
           </Text>
-          <Button title="Entrar" marginBottom="s12" />
+          <Button title="Primary" preset="primary" marginBottom="s12" />
+          <Button title="Outline" preset="outline" marginBottom="s12" />
+          <Button title="Secondary" preset="secondary" marginBottom="s12" />
           <Button loading title="Loading" />
         </View>
       </SafeAreaView>
