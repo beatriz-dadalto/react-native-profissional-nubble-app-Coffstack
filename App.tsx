@@ -3,10 +3,9 @@ import {SafeAreaView, View} from 'react-native';
 import {Text} from './src/components/Text/Text';
 import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
-import {Box} from './src/components/Box/Box';
 import {Button} from './src/components/Button/Button';
 import {TextInput} from './src/components/TextInput/TextInput';
-import { Icon } from './src/components/Icon/Icon';
+import {Icon} from './src/components/Icon/Icon';
 
 function App(): JSX.Element {
   return (
@@ -19,21 +18,19 @@ function App(): JSX.Element {
           <Text preset="paragraphLarge" marginBottom="s40">
             Digite seu e-mail e senha para entrar
           </Text>
-          <Box marginBottom="s20">
-            <TextInput
-              errorMessage="Mensagem de erro"
-              label="E-mail"
-              placeholder="Digite seu e-mail"
-            />
-          </Box>
-          <Box>
-            <TextInput
-              label="Senha"
-              placeholder="Digite sua senha"
-              RightComponent={<Icon name="eyeOn" color="gray2" />}
-            />
-          </Box>
-          <Text marginTop="s8" color="primary" preset="paragraphSmall" bold>
+          <TextInput
+            errorMessage="Mensagem de erro"
+            label="E-mail"
+            placeholder="Digite seu e-mail"
+            boxProps={{marginBottom: 's20'}}
+          />
+          <TextInput
+            label="Senha"
+            placeholder="Digite sua senha"
+            RightComponent={<Icon name="eyeOn" color="gray2" />}
+            boxProps={{marginBottom: 's8'}}
+          />
+          <Text color="primary" preset="paragraphSmall" bold>
             Esqueci minha senha
           </Text>
           <Button title="Entrar" preset="primary" marginTop="s48" />
