@@ -19,11 +19,7 @@ function App(): JSX.Element {
             Digite seu e-mail e senha para entrar
           </Text>
           <Box marginBottom="s20">
-            <TextInput
-              label="E-mail"
-              placeholder="Digite seu e-mail"
-              style={{borderWidth: 1, height: 50}}
-            />
+            <TextInput label="E-mail" placeholder="Digite seu e-mail" />
           </Box>
           <Box>
             <TextInput label="Senha" placeholder="Digite sua senha" />
