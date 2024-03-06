@@ -13,10 +13,10 @@ function App(): JSX.Element {
           <Text preset="headingLarge" bold>
             Beatriz Dadalto!
           </Text>
-          <Button title="Primary" preset="primary" marginBottom="s12" />
+          <Button loading title="Primary" marginBottom="s12" />
+          <Button disabled title="Primary" marginBottom="s12" />
           <Button title="Outline" preset="outline" marginBottom="s12" />
-          <Button title="Secondary" preset="secondary" marginBottom="s12" />
-          <Button loading title="Loading" />
+          <Button disabled preset="outline" title="Loading" />
         </View>
       </SafeAreaView>
     </ThemeProvider>
