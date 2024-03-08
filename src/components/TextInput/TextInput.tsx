@@ -17,7 +17,7 @@ const $textInputStyle: TextStyle = {
   ...$fontSizes.paragraphMedium,
 };
 
-interface TextInputProps extends RNTextInputProps {
+export interface TextInputProps extends RNTextInputProps {
   label: string;
   errorMessage?: string;
   RightComponent?: React.ReactElement;

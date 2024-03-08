@@ -2,13 +2,13 @@ import React from 'react';
 import {Text} from '../../../components/Text/Text';
 import {TextInput} from '../../../components/TextInput/TextInput';
 import {Button} from '../../../components/Button/Button';
-import {Icon} from '../../../components/Icon/Icon';
 import {Screen} from '../../../components/Screen/Screen';
 import {View} from 'react-native';
+import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 
 export function LoginScreen() {
   return (
-    <Screen>
+    <Screen scrollable>
       <View style={{paddingHorizontal: 24}}>
         <Text marginBottom="s8" preset="headingLarge">
           Olá, Beatriz Dadalto!
@@ -22,10 +22,9 @@ export function LoginScreen() {
           placeholder="Digite seu e-mail"
           boxProps={{marginBottom: 's20'}}
         />
-        <TextInput
+        <PasswordInput
           label="Senha"
           placeholder="Digite sua senha"
-          RightComponent={<Icon name="eyeOn" color="gray2" />}
           boxProps={{marginBottom: 's8'}}
         />
         <Text color="primary" preset="paragraphSmall" bold>
