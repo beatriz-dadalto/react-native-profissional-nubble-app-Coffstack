@@ -6,7 +6,11 @@ import {Screen} from '../../../components/Screen/Screen';
 import {View} from 'react-native';
 import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 
-export function LoginScreen() {
+export function LoginScreen({navigation}) {
+  function navigateToSingUpScreen() {
+    navigation.navigate('SignUpScreen');
+  }
+
   return (
     <Screen scrollable>
       <View style={{paddingHorizontal: 24}}>
@@ -31,7 +35,12 @@ export function LoginScreen() {
           Esqueci minha senha
         </Text>
         <Button title="Entrar" preset="primary" marginTop="s48" />
-        <Button title="Criar uma conta" preset="outline" marginTop="s12" />
+        <Button
+          onPress={navigateToSingUpScreen}
+          title="Criar uma conta"
+          preset="outline"
+          marginTop="s12"
+        />
       </View>
     </Screen>
   );
