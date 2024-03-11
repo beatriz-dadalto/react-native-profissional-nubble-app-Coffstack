@@ -4,7 +4,13 @@ import React from 'react';
 import {LoginScreen} from '../screens/auth/Login/LoginScreen';
 import {SignUpScreen} from '../screens/auth/SignUpScreen/SignUpScreen';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  LoginScreen: undefined;
+  SignUpScreen: undefined;
+  // TODO: Success Screen: icon, title, description
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function Router() {
   return (
