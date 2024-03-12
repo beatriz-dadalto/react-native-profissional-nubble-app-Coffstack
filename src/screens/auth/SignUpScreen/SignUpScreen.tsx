@@ -1,14 +1,13 @@
 import React from 'react';
 import {Screen} from '../../../components/Screen/Screen';
 import {Text} from '../../../components/Text/Text';
-import {TextInput} from '../../../components/TextInput/TextInput';
 import {Button} from '../../../components/Button/Button';
-import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../routes/Routes';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
-import {Controller, useForm} from 'react-hook-form';
 import {FormTextInput} from '../../../components/Form/FormTextInput';
+import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
+import {useForm} from 'react-hook-form';
 
 type SingUpFormType = {
   username: string;
@@ -60,43 +59,18 @@ export function SignUpScreen({navigation}: ScreenProps) {
         placeholder="@"
         boxProps={{marginBottom: 's16'}}
       />
-
-      <Controller
-        control={control}
-        name="username"
-        rules={{
-          required: 'Username obrigatório',
-        }}
-        render={({field, fieldState}) => (
-          <TextInput
-            value={field.value}
-            onChangeText={field.onChange}
-            errorMessage={fieldState.error?.message}
-            label="Seu username"
-            placeholder="@"
-            boxProps={{marginBottom: 's16'}}
-          />
-        )}
-      />
-      <Controller
+      <FormTextInput
         control={control}
         name="fullName"
         rules={{
           required: 'Nome obrigatório',
         }}
-        render={({field, fieldState}) => (
-          <TextInput
-            autoCapitalize="words"
-            value={field.value}
-            onChangeText={field.onChange}
-            errorMessage={fieldState.error?.message}
-            label="Nome Completo"
-            placeholder="Digite seu nome completo"
-            boxProps={{marginBottom: 's16'}}
-          />
-        )}
+        autoCapitalize="words"
+        label="Nome Completo"
+        placeholder="Digite seu nome completo"
+        boxProps={{marginBottom: 's16'}}
       />
-      <Controller
+      <FormTextInput
         control={control}
         name="email"
         rules={{
@@ -106,18 +80,11 @@ export function SignUpScreen({navigation}: ScreenProps) {
             message: 'Email inválido',
           },
         }}
-        render={({field, fieldState}) => (
-          <TextInput
-            errorMessage={fieldState.error?.message}
-            value={field.value}
-            onChangeText={field.onChange}
-            label="E-mail"
-            placeholder="Digite seu e-mail"
-            boxProps={{marginBottom: 's16'}}
-          />
-        )}
+        label="E-mail"
+        placeholder="Digite seu e-mail"
+        boxProps={{marginBottom: 's16'}}
       />
-      <Controller
+      <FormPasswordInput
         control={control}
         name="password"
         rules={{
@@ -127,17 +94,10 @@ export function SignUpScreen({navigation}: ScreenProps) {
             message: 'Senha deve ter no mínimo 8 caracteres',
           },
         }}
-        render={({field, fieldState}) => (
-          <PasswordInput
-            errorMessage={fieldState.error?.message}
-            value={field.value}
-            onChangeText={field.onChange}
-            label="Senha"
-            secureTextEntry
-            placeholder="Digite sua senha"
-            boxProps={{marginBottom: 's48'}}
-          />
-        )}
+        label="Senha"
+        secureTextEntry
+        placeholder="Digite sua senha"
+        boxProps={{marginBottom: 's48'}}
       />
       <Button
         disabled={!formState.isValid}
