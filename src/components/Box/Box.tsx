@@ -12,11 +12,11 @@ import {
   spacingShorthand,
   SpacingShorthandProps,
 } from '@shopify/restyle';
-import {Theme} from '../../theme/theme';
 import {
   TouchableOpacity,
   TouchableOpacityProps as RNTouchableOpacityProps,
 } from 'react-native';
+import {Theme} from '@theme';
 
 export type BoxProps = React.ComponentProps<typeof Box>;
 
