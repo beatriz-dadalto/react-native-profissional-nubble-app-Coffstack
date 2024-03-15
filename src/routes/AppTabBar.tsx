@@ -23,7 +23,6 @@ export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
   return (
     <Box
       {...$boxWrapper}
-      backgroundColor="carrotSecondary"
       style={[{paddingBottom: bottom, paddingTop: top}, $shadowProps]}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
