@@ -1,4 +1,6 @@
-// REPRESENTAÇÃO DOS META DADOS DE COMO ESTÃO NA API
+/**
+ * @description Interface que representa os dados como estão na API
+ */
 export interface MetaDataPageAPI {
   total: number; // 24;
   per_page: number; // 10;
@@ -20,6 +22,9 @@ export interface PageAPI<TData> {
   data: TData[];
 }
 
+/**
+ * @description Parâmetros de busca de um endpoint
+ */
 export interface PageParams {
   page?: number;
   per_page?: number;

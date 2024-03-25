@@ -1,3 +1,6 @@
+/**
+ * @description Interface que define o domínio interno - model Post
+ */
 export interface Post {
   id: string;
   text: string;
@@ -12,7 +15,9 @@ export interface Post {
   favoriteCount: number;
 }
 
-// REPRESENTAÇÃO DOS DADOS DE COMO ESTÃO NA API
+/**
+ * @description Interface que representa os dados como estão na API
+ */
 export interface PostAPI {
   id: number; // 1
   text: string; //'Bom dia!'
