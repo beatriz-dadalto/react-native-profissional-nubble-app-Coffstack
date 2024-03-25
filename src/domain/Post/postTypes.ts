@@ -2,7 +2,7 @@
  * @description Interface que define o domínio interno - model Post
  */
 export interface Post {
-  id: string;
+  id: number;
   text: string;
   author: {
     profileURL: string;
