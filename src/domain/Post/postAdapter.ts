@@ -1,4 +1,4 @@
-import {Post, PostAPI} from './postTypes';
+import {Post, PostAPI} from '@domain';
 
 /**
  * @description Adapta o PostAPI para o modelo de Post

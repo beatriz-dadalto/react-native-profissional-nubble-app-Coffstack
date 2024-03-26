@@ -1,6 +1,5 @@
 import {PageAPI, PageParams, api} from '@api';
-
-import {PostCommentAPI} from './postCommentTypes';
+import {PostCommentAPI} from '@domain';
 
 async function getList(
   post_id: number,

@@ -1,4 +1,4 @@
-import {PostComment, PostCommentAPI} from './postCommentTypes';
+import {PostComment, PostCommentAPI} from '@domain';
 
 /**
  * @description Adapta o PostCommentAPI para o modelo de PostComment
