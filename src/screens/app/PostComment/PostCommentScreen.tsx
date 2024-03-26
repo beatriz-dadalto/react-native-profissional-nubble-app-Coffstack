@@ -6,7 +6,7 @@ import {PostComment, usePostCommentList} from '@domain';
 import {Screen} from '@components';
 import {AppScreenProps} from '@routes';
 
-import {PostCommentItem} from './components/PostCommentItem';
+import {PostCommentBottom, PostCommentItem} from './components';
 
 export function PostCommentScreen({
   route,
@@ -20,7 +20,11 @@ export function PostCommentScreen({
 
   return (
     <Screen title="Comentários" canGoBack>
-      <FlatList data={list} renderItem={renderItem} />
+      <FlatList
+        data={list}
+        renderItem={renderItem}
+        ListFooterComponent={<PostCommentBottom />}
+      />
     </Screen>
   );
 }
