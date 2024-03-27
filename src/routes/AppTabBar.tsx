@@ -11,19 +11,20 @@ import {
   TouchableOpacityBox,
   TouchableOpacityBoxProps,
 } from '@components';
-import {useAppSafeArea} from '@hooks';
+import {useAppSafeArea, useAppTheme} from '@hooks';
 import {$shadowProps} from '@theme';
 
 import {AppTabBottomTabParamList} from './AppTabNavigator';
 import {mapScreenToProps} from './mapScreenToProps';
 
 export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
-  const {bottom, top} = useAppSafeArea();
+  const {bottom} = useAppSafeArea();
+  const {spacing} = useAppTheme();
 
   return (
     <Box
       {...$boxWrapper}
-      style={[{paddingBottom: bottom, paddingTop: top}, $shadowProps]}>
+      style={[{paddingBottom: bottom, paddingTop: spacing.s8}, $shadowProps]}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
 

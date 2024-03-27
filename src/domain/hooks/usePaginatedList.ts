@@ -67,6 +67,7 @@ export function usePaginatedList<TData>(
     error,
     list,
     refresh: fetchInitialData,
+    hasNextPage,
     fetchNextPage,
   };
 }

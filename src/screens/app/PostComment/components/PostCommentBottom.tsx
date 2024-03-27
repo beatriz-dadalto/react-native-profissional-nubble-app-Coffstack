@@ -3,10 +3,21 @@ import {Pressable} from 'react-native';
 
 import {Text} from '@components';
 
-export function PostCommentBottom() {
-  return (
-    <Pressable>
-      <Text color="primary">Ver mais</Text>
-    </Pressable>
-  );
+interface Props {
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+}
+
+export function PostCommentBottom({fetchNextPage, hasNextPage}: Props) {
+  if (hasNextPage) {
+    return (
+      <Pressable onPress={fetchNextPage}>
+        <Text color="primary" textAlign="center">
+          Ver mais
+        </Text>
+      </Pressable>
+    );
+  }
+
+  return null;
 }

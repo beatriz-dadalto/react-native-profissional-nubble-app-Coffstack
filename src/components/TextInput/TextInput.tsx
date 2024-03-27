@@ -11,14 +11,6 @@ import {useAppTheme} from '@hooks';
 import {Box, BoxProps} from '../Box/Box';
 import {$fontFamily, $fontSizes, Text} from '../Text/Text';
 
-const $textInputStyle: TextStyle = {
-  flexGrow: 1,
-  flexShrink: 1,
-  padding: 0,
-  fontFamily: $fontFamily.regular,
-  ...$fontSizes.paragraphMedium,
-};
-
 export interface TextInputProps extends RNTextInputProps {
   label: string;
   errorMessage?: string;
@@ -77,3 +69,11 @@ export function TextInput({
     </Box>
   );
 }
+
+export const $textInputStyle: TextStyle = {
+  flexGrow: 1,
+  flexShrink: 1,
+  padding: 0,
+  fontFamily: $fontFamily.regular,
+  ...$fontSizes.paragraphMedium,
+};
