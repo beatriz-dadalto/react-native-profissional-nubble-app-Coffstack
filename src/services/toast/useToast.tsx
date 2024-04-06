@@ -1,51 +1,7 @@
-import React, {createContext, useContext} from 'react';
+import {ToastService} from './toastTypes';
+import {useToastContext} from './useToastContext';
 
-interface Toast {
-  message: string;
-  type?: 'success' | 'error';
-  duration?: number;
-  action?: {
-    title: string;
-    onPress: () => void;
-  };
-}
-
-interface ToastService {
-  toast: Toast | null;
-  showToast: (toast: Toast) => void;
-  hiddenToast: () => void;
-}
-
-const ToastContext = createContext<ToastService>({
-  toast: null,
-  showToast: () => {},
-  hiddenToast: () => {},
-});
-
-export function ToastProvider({children}: React.PropsWithChildren<{}>) {
-  const [toast, setToast] = React.useState<ToastService['toast']>(null);
-
-  function showToast(_toast: Toast) {
-    setToast(_toast);
-  }
-
-  function hiddenToast() {
-    setToast(null);
-  }
-
-  return (
-    <ToastContext.Provider value={{toast, showToast, hiddenToast}}>
-      {children}
-    </ToastContext.Provider>
-  );
-}
-
-export function useToast() {
-  const {toast, showToast, hiddenToast} = useContext(ToastContext);
-
-  return {
-    toast,
-    showToast,
-    hiddenToast,
-  };
+/**@description Isola a implementação de `useToastContext()` para poder alternar facilmente entre context e zustand ou algum outro meio de genrência de estado */
+export function useToast(): ToastService {
+  return useToastContext();
 }
