@@ -6,7 +6,7 @@ import {dateUtils} from '@utils';
  */
 function toPostComment(postCommentAPI: PostCommentAPI): PostComment {
   return {
-    id: postCommentAPI.id.toString(),
+    id: postCommentAPI.id,
     message: postCommentAPI.message,
     createdAt: postCommentAPI.created_at,
     createdAtRelative: dateUtils.formatRelative(postCommentAPI.created_at),
