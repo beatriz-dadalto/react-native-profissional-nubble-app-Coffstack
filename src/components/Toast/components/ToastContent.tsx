@@ -44,9 +44,7 @@ const $textStyle: BoxProps = {
 };
 
 const $boxStyle: BoxProps = {
-  position: 'absolute',
   backgroundColor: 'background',
-  alignSelf: 'center',
   alignItems: 'center',
   padding: 's16',
   borderRadius: 's16',
