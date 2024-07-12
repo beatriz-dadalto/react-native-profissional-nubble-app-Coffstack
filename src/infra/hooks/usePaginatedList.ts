@@ -1,73 +1,49 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
+import {useInfiniteQuery} from '@tanstack/react-query';
 import {Page} from '@types';
+
+export interface UsePaginatedListResult<TData> {
+  list: TData[];
+  isLoading: boolean;
+  isError: boolean | null;
+  refresh: () => void;
+  hasNextPage: boolean;
+  fetchNextPage: () => void;
+}
 
 /**
  * @description Hook para usar toda vez que precisar fazer uma lista paginada
  * @template TData Interface genérica que representa o tipo de dado da lista
  */
 export function usePaginatedList<TData>(
+  queryKey: readonly unknown[],
   getList: (page: number) => Promise<Page<TData>>,
-) {
-  const INITIAL_PAGE = 1;
+): UsePaginatedListResult<TData> {
   const [list, setList] = React.useState<TData[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<boolean | null>(null);
-  const [page, setPage] = React.useState(INITIAL_PAGE);
-  const [hasNextPage, setHasNextPage] = React.useState(true);
 
-  async function fetchInitialData() {
-    try {
-      setError(null);
-      setLoading(true);
-      const {data, meta} = await getList(INITIAL_PAGE);
-      setList(data);
-      if (meta.hasNextPage) {
-        setPage(2);
-        setHasNextPage(true);
-      } else {
-        setHasNextPage(false);
-      }
-    } catch (errorMessage) {
-      console.log('ERROR: ', errorMessage);
-      setError(true);
-    } finally {
-      setLoading(false);
+  const query = useInfiniteQuery({
+    queryKey,
+    queryFn: ({pageParam = 1}) => getList(pageParam),
+    getNextPageParam: ({meta}) =>
+      meta.hasNextPage ? meta.currentPage + 1 : undefined,
+  });
+
+  useEffect(() => {
+    if (query.data) {
+      const newList = query.data.pages.reduce<TData[]>((prev, curr) => {
+        return [...prev, ...curr.data];
+      }, []);
+      setList(newList);
     }
-  }
-
-  React.useEffect(() => {
-    fetchInitialData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  async function fetchNextPage() {
-    if (loading || !hasNextPage) {
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const {data, meta} = await getList(page);
-      setList(prev => [...prev, ...data]);
-      if (meta.hasNextPage) {
-        setPage(prev => prev + 1);
-      } else {
-        setHasNextPage(false);
-      }
-    } catch (err) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
+  }, [query.data]);
 
   return {
-    loading,
-    error,
     list,
-    refresh: fetchInitialData,
-    hasNextPage,
-    fetchNextPage,
+    isLoading: query.isLoading,
+    isError: query.isError,
+    refresh: query.refetch,
+    hasNextPage: !!query.hasNextPage,
+    fetchNextPage: query.fetchNextPage,
   };
 }
