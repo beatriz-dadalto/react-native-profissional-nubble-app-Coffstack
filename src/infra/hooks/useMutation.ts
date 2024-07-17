@@ -7,6 +7,7 @@ export interface MutationOptions<TData> {
 }
 
 /**
+ * @deprecated utilize a useMutation da `@tanstack/react-query`
  * @description Adicionar, Exlucir ou Modificar alguma coisa
  * @param mutationFn exemplo: quando postCommentService chama algum serviço dele
  * @param TVariables São variaveis da mutation
