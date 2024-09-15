@@ -1,4 +1,4 @@
-import {userAdapter} from 'src/domain/User/userAdapter';
+import {userAdapter} from '../../User/userAdapter';
 
 import {AuthCredentials, AuthCredentialsAPI} from './authTypes';
 
