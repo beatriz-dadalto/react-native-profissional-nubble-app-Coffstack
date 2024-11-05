@@ -1,7 +1,7 @@
 import {useAuthCredentials} from '@services';
 import {useMutation} from '@tanstack/react-query';
 
-import {authService} from './authService';
+import {authService} from '../authService';
 
 export function useAuthSignOut() {
   const {removeCredentials} = useAuthCredentials();
@@ -9,7 +9,6 @@ export function useAuthSignOut() {
     mutationFn: authService.signOut,
     retry: false,
     onSuccess: () => {
-      authService.removeToken();
       removeCredentials();
     },
   });

@@ -2,8 +2,8 @@ import {MutationOptions} from '@infra';
 import {useAuthCredentials} from '@services';
 import {useMutation} from '@tanstack/react-query';
 
-import {authService} from './authService';
-import {AuthCredentials} from './authTypes';
+import {authService} from '../authService';
+import {AuthCredentials} from '../authTypes';
 
 interface Variables {
   email: string;
@@ -21,7 +21,6 @@ export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
       }
     },
     onSuccess: authCredentials => {
-      authService.updateToken(authCredentials.token);
       saveCredentials(authCredentials);
     },
   });

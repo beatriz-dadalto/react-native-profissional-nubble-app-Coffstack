@@ -1,8 +1,9 @@
 import {createContext} from 'react';
 import React from 'react';
 
-import {AuthCredentials} from '@domain';
+import {AuthCredentials, authService} from '@domain';
 
+import {authCredentialsStorage} from '../authCredentialsStorage';
 import {AuthCredentialsService} from '../authCredentialsTypes';
 
 export const AuthCredentialsContext = createContext<AuthCredentialsService>({
@@ -18,17 +19,34 @@ export function AuthCredentialsProvider({
   const [authCredentials, setAuthCredentials] =
     React.useState<AuthCredentials | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  setIsLoading(false); // inseri apenas para poder commitar sem erro
+
+  React.useEffect(() => {
+    startAuthCredentials();
+  }, []);
+
+  async function startAuthCredentials() {
+    try {
+      const ac = await authCredentialsStorage.get();
+      if (ac) {
+        authService.updateToken(ac.token);
+        setAuthCredentials(ac);
+      }
+    } catch (error) {
+      // TODO handle error
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   async function saveCredentials(ac: AuthCredentials): Promise<void> {
-    // TODO persist
-
+    authService.updateToken(ac.token);
+    authCredentialsStorage.set(ac);
     setAuthCredentials(ac);
   }
 
   async function removeCredentials(): Promise<void> {
-    // TODO persist
-
+    authService.removeToken();
+    authCredentialsStorage.remove();
     setAuthCredentials(null);
   }
 
