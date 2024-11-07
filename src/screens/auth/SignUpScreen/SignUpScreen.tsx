@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useAuthSignUp} from '@domain';
+import {useAuthIsUsernameAvailable, useAuthSignUp} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
@@ -10,6 +10,7 @@ import {
   Button,
   FormTextInput,
   FormPasswordInput,
+  ActivityIndicator,
 } from '@components';
 import {useResetNavigationSuccess} from '@hooks';
 import {AuthScreenProps, AuthStackParamList} from '@routes';
@@ -36,16 +37,22 @@ const defaultValues: SingUpSchema = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
   const {reset} = useResetNavigationSuccess();
+
   const {singUp, isLoading} = useAuthSignUp({
     onSuccess: () => {
       reset(resetParam);
     },
   });
-  const {control, formState, handleSubmit} = useForm<SingUpSchema>({
+
+  const {control, formState, handleSubmit, watch} = useForm<SingUpSchema>({
     resolver: zodResolver(singUpSchema),
     defaultValues,
     mode: 'onChange',
   });
+
+  const username = watch('username');
+
+  const usernameQuery = useAuthIsUsernameAvailable({username});
 
   function submitForm(formValues: SingUpSchema) {
     singUp(formValues);
@@ -62,6 +69,11 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         label="Seu username"
         placeholder="@"
         boxProps={{marginBottom: 's16'}}
+        RightComponent={
+          usernameQuery.isFetching ? (
+            <ActivityIndicator size="small" />
+          ) : undefined
+        }
       />
       <FormTextInput
         control={control}

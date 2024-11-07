@@ -25,6 +25,16 @@ async function singUp(singUpData: SignUpData): Promise<void> {
   await authApi.singUp(singUpData);
 }
 
+async function isUserNameAvailable(username: string): Promise<boolean> {
+  const {isAvailable} = await authApi.isUserNameAvailable({username});
+  return isAvailable;
+}
+
+async function isEmailAvailable(email: string): Promise<boolean> {
+  const {isAvailable} = await authApi.isEmailAvailable({email});
+  return isAvailable;
+}
+
 function updateToken(token: string) {
   api.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
@@ -39,4 +49,6 @@ export const authService = {
   singUp,
   updateToken,
   removeToken,
+  isUserNameAvailable,
+  isEmailAvailable,
 };
