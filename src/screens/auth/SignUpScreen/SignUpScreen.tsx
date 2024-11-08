@@ -44,15 +44,20 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
     },
   });
 
-  const {control, formState, handleSubmit, watch} = useForm<SingUpSchema>({
-    resolver: zodResolver(singUpSchema),
-    defaultValues,
-    mode: 'onChange',
-  });
+  const {control, formState, handleSubmit, watch, getFieldState} =
+    useForm<SingUpSchema>({
+      resolver: zodResolver(singUpSchema),
+      defaultValues,
+      mode: 'onChange',
+    });
 
   const username = watch('username');
-
-  const usernameQuery = useAuthIsUsernameAvailable({username});
+  const usernameState = getFieldState('username');
+  const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
+  const usernameQuery = useAuthIsUsernameAvailable({
+    username,
+    enabled: usernameIsValid,
+  });
 
   function submitForm(formValues: SingUpSchema) {
     singUp(formValues);
@@ -108,7 +113,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
       />
       <Button
         loading={isLoading}
-        disabled={!formState.isValid}
+        disabled={!formState.isValid || usernameQuery.isFetching}
         title="Criar uma conta"
         onPress={handleSubmit(submitForm)}
       />
