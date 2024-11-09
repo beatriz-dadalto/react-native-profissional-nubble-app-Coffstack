@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useAuthIsUsernameAvailable, useAuthSignUp} from '@domain';
+import {useAuthSignUp} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
@@ -16,6 +16,7 @@ import {useResetNavigationSuccess} from '@hooks';
 import {AuthScreenProps, AuthStackParamList} from '@routes';
 
 import {SingUpSchema, singUpSchema} from './singUpSchema';
+import {useAsyncValidation} from './useAsyncValidation';
 
 const resetParam: AuthStackParamList['SuccessScreen'] = {
   title: 'Sua conta foi criada com sucesso!',
@@ -51,13 +52,18 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
       mode: 'onChange',
     });
 
-  const username = watch('username');
-  const usernameState = getFieldState('username');
-  const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
-  const usernameQuery = useAuthIsUsernameAvailable({
-    username,
-    enabled: usernameIsValid,
+  const {usernameValidation, emailValidation} = useAsyncValidation({
+    watch,
+    getFieldState,
   });
+
+  // const username = watch('username');
+  // const usernameState = getFieldState('username');
+  // const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
+  // const usernameQuery = useAuthIsUsernameAvailable({
+  //   username,
+  //   enabled: usernameIsValid,
+  // });
 
   function submitForm(formValues: SingUpSchema) {
     singUp(formValues);
@@ -73,12 +79,10 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         name="username"
         label="Seu username"
         placeholder="@"
-        errorMessage={
-          usernameQuery.isUnavailable ? 'username indisponível' : undefined
-        }
+        errorMessage={usernameValidation.errorMessage}
         boxProps={{marginBottom: 's16'}}
         RightComponent={
-          usernameQuery.isFetching ? (
+          usernameValidation.isFetching ? (
             <ActivityIndicator size="small" />
           ) : undefined
         }
@@ -103,8 +107,14 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         control={control}
         name="email"
         label="E-mail"
+        errorMessage={emailValidation.errorMessage}
         placeholder="Digite seu e-mail"
         boxProps={{marginBottom: 's16'}}
+        RightComponent={
+          emailValidation.isFetching ? (
+            <ActivityIndicator size="small" />
+          ) : undefined
+        }
       />
       <FormPasswordInput
         control={control}
@@ -118,8 +128,8 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
         loading={isLoading}
         disabled={
           !formState.isValid ||
-          usernameQuery.isFetching ||
-          usernameQuery.isUnavailable
+          usernameValidation.notReady ||
+          emailValidation.notReady
         }
         title="Criar uma conta"
         onPress={handleSubmit(submitForm)}
