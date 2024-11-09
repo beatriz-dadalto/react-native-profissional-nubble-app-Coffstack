@@ -57,14 +57,6 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUpScreen'>) {
     getFieldState,
   });
 
-  // const username = watch('username');
-  // const usernameState = getFieldState('username');
-  // const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
-  // const usernameQuery = useAuthIsUsernameAvailable({
-  //   username,
-  //   enabled: usernameIsValid,
-  // });
-
   function submitForm(formValues: SingUpSchema) {
     singUp(formValues);
   }
